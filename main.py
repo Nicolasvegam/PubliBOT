@@ -1,9 +1,9 @@
 from Supermetrics_API import Integration
 from Tableau_API import Tableau_extractor
 from Design import PowerPointer
-#from cropping import cropping_images
+from cropping import cropping_images, convert_images
 import time
-
+from prettytable import PrettyTable
 
 all = {
 'SACTI': ['FENSA', 'MADEMSA', 'ELECTROLUX'],
@@ -74,27 +74,37 @@ if __name__ == '__main__':
     start_date = '2019-07-01' # 2019-06-01 format año/mes/dia
     end_date =  '2019-07-09' # 2019-06-01 format año/mes/dia
 
-    print("Opciones: ")
-    for tienda_madre in all:
-        print("Filtro Tableau: {0} - Filtro Ad Manager {1} ".format(tienda_madre, all[tienda_madre]))
+    print("Opciones: \n")
 
-    tableau = input("\nFiltro Tableau: ")
-    ad_manager_seller = input("\nFiltro AdManager: ")
+
+    x = PrettyTable()
+
+    x.field_names = ["Filtro Tableau", "Filtro Ad Manager"]
+    for tienda_madre in all:
+        x.add_row([tienda_madre, all[tienda_madre]])
+
+    print(x)
+
+    tableau = input("\nSeleccione Filtro Tableau: ")
+    ad_manager_seller = input("\nSeleccione Filtro AdManager: ")
 
     #start_date = input("\nIngrese fecha de inicio (formato año-mes-días ej: {0}): ".format(start_date))
     #end_date = input("\nIngrese fecha de término (formato año-mes-días ej: {0}): ".format(end_date))
-    start_date = '2019-07-01' # 2019-06-01 format año/mes/dia
-    end_date =  '2019-07-09' # 2019-06-01 format año/mes/dia
 
-    #cropping_images()
+    start_date = '2019-07-01' # 2019-06-01 format año/mes/dia
+    end_date =  '2019-07-17' # 2019-06-01 format año/mes/dia
+
+    cropping_images()
+    convert_images()
 
     pr = PowerPointer()
     pr.first_slide()
     class_ = Tableau_extractor()
     class_.get_images(tableau)
     class_.cropping_images(tableau)
-    img_path_1 = './daily_view.png'
-    img_path_2 = './monthly_view.png'
+
+    img_path_1 = './monthly_view.png'
+    img_path_2 = './daily_view.png'
     img_path_3 = './analytics/sex.png'
     img_path_4 = './analytics/age.png'
     img_path_5 = './analytics/regions.png'

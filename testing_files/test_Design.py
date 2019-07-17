@@ -69,6 +69,8 @@ class PowerPointer:
         table.columns[2].width = Inches(1.5)
         table.columns[3].width = Inches(2.0)
 
+        print(values)
+        
         for i in range(0, cols):
             for j in range(0, rows):
                 table.cell(j, i).text = str(values[j][i])

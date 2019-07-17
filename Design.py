@@ -22,17 +22,14 @@ class PowerPointer:
         #slide = self.presentation.slides.add_slide(self.presentation.slide_layouts[0])
         slide = self.presentation.slides[0]
         title = slide.shapes.title
-        #subtitle = slide.placeholders[1]
-        #title.text = "Advertising Report to"
-        #subtitle.text = " Keep growing "
+
 
     def add_table(self, values, title, number):
-        print("[add_table] Agregando tabla \n")
+        #print("[add_table] Agregando tabla \n")
         title_only_slide_layout = self.presentation.slide_layouts[5]
         #slide = self.presentation.slides.add_slide(title_only_slide_layout)
         slide = self.presentation.slides[number]
         shapes = slide.shapes
-
         #shapes.title.text = title
 
         left = Inches(1.0)
@@ -43,7 +40,7 @@ class PowerPointer:
         cols = len(values[0])
         rows = len(values)
 
-        table = shapes.add_table(rows, cols, left, top, width, height).table
+        table = shapes.add_table(rows, cols + 1, left, top, width, height).table
 
         values = change_values(values)
         # set column widths
@@ -52,12 +49,18 @@ class PowerPointer:
         table.columns[2].width = Inches(1.5)
         table.columns[3].width = Inches(2.0)
 
-        for i in range(0, cols):
+        for i in range(0,len(values)):
+            if i == 0:
+                values[i].insert(1, 'Objetivo')
+            else:
+                values[i].insert(1, '0')
+
+        for i in range(0, cols+1):
             for j in range(0, rows):
                 table.cell(j, i).text = str(values[j][i])
 
     def add_imagen(self, img_path, number):
-        print("[add_image] Agregando imagen \n")
+        #print("[add_image] Agregando imagen \n")
         #img_path = 'monty-truth.png'
         blank_slide_layout = self.presentation.slide_layouts[6]
         #slide = self.presentation.slides.add_slide(blank_slide_layout)

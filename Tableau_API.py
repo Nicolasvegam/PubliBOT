@@ -43,11 +43,11 @@ class Tableau_extractor:
 
             for view in matching_views:
                 workbook = self.server.workbooks.get_by_id(view.workbook_id)
-                print(view.name + ": " + workbook.name)
+                #print(view.name + ": " + workbook.name)
 
                 if workbook.name == "MLC Publicidad Monthly View" or workbook.name == "MLC Publicidad Daily View":
                     real_matching_views.append(view)
-                    print(view.name + ": " + workbook.name)
+                    #print(view.name + ": " + workbook.name)
 
             Daily_view = real_matching_views[0]
             Monthly_view = real_matching_views[1]
