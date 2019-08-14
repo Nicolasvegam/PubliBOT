@@ -1,0 +1,4 @@
+ad_manager:
+  application_name: 'Mercado Libre'
+  network_code: 105773011
+  path_to_private_key_file: 'C:\Users\ext_nicovega\Desktop\PubliBot\client_secret_773664483695-tp6q1ditrsl96fm0a1f6ir8sg75ftod6.apps.googleusercontent.com.json'
