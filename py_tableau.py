@@ -8,7 +8,7 @@ import os
 class Tableau_extractor:
 
     def __init__(self):
-        self.tableau_auth = TSC.TableauAuth('aabogabir', 'aabogabir', site_id='Sales') # username/password/sitio
+        self.tableau_auth = TSC.TableauAuth('public', 'public', site_id='Sales') # username/password/sitio
         self.server = TSC.Server('https://tableau.adminml.com') #Server
         self.server.version = '2.5' #Changing version
         self.server.use_server_version()
@@ -44,12 +44,12 @@ class Tableau_extractor:
                 workbook = self.server.workbooks.get_by_id(view.workbook_id)
                 #print(view.name + ": " + workbook.name)
 
-                if workbook.name == "MLC Publicidad Monthly View" or workbook.name == "MLC Publicidad Daily View":
+                if workbook.name == "MLC Monthly View" or workbook.name == "MLC Daily View":
                     real_matching_views.append(view)
                     #print(view.name + ": " + workbook.name)
 
-            Daily_view = real_matching_views[0]
-            Monthly_view = real_matching_views[1]
+            Daily_view = real_matching_views[1]
+            Monthly_view = real_matching_views[0]
 
 
             #Adding filter views
@@ -79,8 +79,8 @@ class Tableau_extractor:
         path = os.path.dirname(os.path.abspath(__file__))
         montly_img = cv2.imread("monthly_view.png")
         daily_img = cv2.imread("daily_view.png")
-        crop_montly_img = montly_img[170:920, 0:800] #Cropping in the right size, just required insights
-        crop_daily_img = daily_img[240:1060, 0:800] #Cropping in the right size, just required insights
+        crop_montly_img = montly_img[165:910, 0:800] #Cropping in the right size, just required insights
+        crop_daily_img = daily_img[240:1070, 0:800] #Cropping in the right size, just required insights
         cv2.imwrite("monthly_view.png", crop_montly_img)
         cv2.imwrite("daily_view.png", crop_daily_img)
         cv2.waitKey(0)

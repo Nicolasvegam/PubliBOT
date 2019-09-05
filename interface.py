@@ -27,6 +27,7 @@ class Ui_Form(object):
         self.cerrar = QtWidgets.QPushButton(Form)
         self.cerrar.setGeometry(QtCore.QRect(250, 210, 81, 23))
         self.cerrar.setObjectName("cerrar")
+        self.cerrar.clicked.connect(self.close)
         self.publi = QtWidgets.QLabel(Form)
         self.publi.setGeometry(QtCore.QRect(99, 10, 251, 41))
         self.publi.setText("")
